@@ -1,0 +1,21 @@
+{
+  "citation": "@inproceedings{kocon-etal-2019-multi,\n    title = \"Multi-Level Sentiment Analysis of {P}ol{E}mo 2.0: Extended Corpus of Multi-Domain Consumer Reviews\",\n    author = \"Koco{'n}, Jan  and\n      Mi{\\l}kowski, Piotr  and\n      Za{'s}ko-Zieli{'n}ska, Monika\",\n    booktitle = \"Proceedings of the 23rd Conference on Computational Natural Language Learning (CoNLL)\",\n    month = nov,\n    year = \"2019\",\n    address = \"Hong Kong, China\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://www.aclweb.org/anthology/K19-1092\",\n    doi = \"10.18653/v1/K19-1092\",\n    pages = \"980--991\",}",
+  "description": "PolEmo 2.0:  Corpus of Multi-Domain Consumer Reviews, evaluation data for article presented at CoNLL.",
+  "features": {
+    "text": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "target": {
+      "names": [
+        "zero",
+        "minus",
+        "plus",
+        "amb"
+      ],
+      "_type": "ClassLabel"
+    }
+  },
+  "homepage": "https://clarin-pl.eu/dspace/handle/11321/710",
+  "license": "CC-BY-4.0"
+}

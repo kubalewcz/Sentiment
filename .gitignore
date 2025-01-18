@@ -1,0 +1,9 @@
+
+/model/herbert/model.safetensors
+/model/herbert/optimizer.pt
+/model/herbert/rng_state.pth
+/model/herbert/scheduler.pt
+/model/herbert/trainer_state.json
+/model/herbert/training_args.bin
+/.venv/
+
