@@ -6,4 +6,5 @@
 /model/herbert/trainer_state.json
 /model/herbert/training_args.bin
 /.venv/
+/.idea/
 
