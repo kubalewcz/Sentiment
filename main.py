@@ -16,13 +16,13 @@ def predict_sentiment(text):
 
 
     if predicted_class == 0:
-        sentiment = "neutral"
+        sentiment = "neutralny"
     elif predicted_class == 1:
-        sentiment = "negative"
+        sentiment = "negatywny"
     elif predicted_class == 2:
-        sentiment = "positive"
+        sentiment = "pozytywny"
     else:
-        sentiment = "ambigous"
+        sentiment = "niezdecydowany"
 
     return sentiment
 
