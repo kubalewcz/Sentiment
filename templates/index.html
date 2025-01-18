@@ -17,17 +17,53 @@
 <body>
     <div class="container">
         <h1 class="text-center mb-4">Analiza tu</h1>
-        <form method="post" class="mb-4">
+
+        <!-- Form to analyze a single sentence -->
+        <form method="post" enctype="multipart/form-data" class="mb-4">
             <div class="form-group">
                 <label for="sentence">Tu tekst:</label>
                 <input type="text" id="sentence" name="sentence" class="form-control" value="{{ sentence }}" required>
             </div>
-            <button type="submit" class="btn btn-primary">
-                <i class="fas fa-search"></i> Tu klik
+            <button type="submit" name="analyze_text" class="btn btn-primary">
+                <i class="fas fa-search"></i> Analizuj Tekst
             </button>
         </form>
+
+        <!-- Form to analyze data from a CSV file -->
+        <form method="post" enctype="multipart/form-data" class="mb-4">
+            <div class="form-group">
+                <label for="csv_file">Prześlij plik CSV:</label>
+                <input type="file" id="csv_file" name="csv_file" class="form-control-file" accept=".csv" required>
+            </div>
+            <button type="submit" name="analyze_csv" class="btn btn-secondary">
+                <i class="fas fa-file-upload"></i> Analizuj CSV(10 wierszy XD)
+            </button>
+        </form>
+
+        <!-- Display results for single sentence analysis -->
         {% if sentiment %}
             <h2 class="alert alert-info">Ten tekst jest: {{ sentiment }}</h2>
+        {% endif %}
+
+        <!-- Display results for CSV analysis -->
+        {% if csv_results %}
+            <h3 class="mt-4">Wyniki analizy:</h3>
+            <table class="table table-bordered mt-3">
+                <thead>
+                    <tr>
+                        <th>Sentyment</th>
+                        <th>Ilość</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for sentiment, count in csv_results.items() %}
+                        <tr>
+                            <td>{{ sentiment }}</td>
+                            <td>{{ count }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         {% endif %}
     </div>
 </body>
