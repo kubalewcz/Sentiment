@@ -1,6 +1,6 @@
 
 from flask import Flask, request, render_template
-from main import predict_sentiment, predict_csv
+from backend import predict_sentiment, predict_csv
 import pandas as pd
 
 
