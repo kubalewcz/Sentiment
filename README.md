@@ -1,4 +1,4 @@
-A Python-based machine learning project for sentiment analysis in Polish, leveraging a fine-tuned BERT model. This tool enables accurate classification of Polish-language text into positive, negative, or neutral sentiments.
+A Python project featuring a fine-tuned BERT machine learning model for sentiment analysis in Polish. Accurately classify Polish-language texts (positive, negative, neutral) using simple Flask web frontend.
 
 
 
