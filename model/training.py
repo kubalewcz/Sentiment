@@ -38,7 +38,7 @@ tokenized_test.set_format("torch", columns=["input_ids", "attention_mask", "labe
 
 data_collator = DataCollatorWithPadding(tokenizer=tokenizer)
 
-# Define training arguments
+
 training_args = TrainingArguments(
     output_dir="./model/xxx",
     evaluation_strategy="epoch",
@@ -56,7 +56,7 @@ training_args = TrainingArguments(
 )
 
 
-# Define metrics computation function
+
 def compute_metrics(eval_pred):
     accuracy_metric = evaluate_load("accuracy")
 
