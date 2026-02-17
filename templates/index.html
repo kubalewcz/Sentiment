@@ -16,55 +16,81 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="text-center mb-4">Analiza tu</h1>
+        <h1 class="text-center mb-4">sample sampler</h1>
 
         <!-- Form to analyze a single sentence -->
         <form method="post" enctype="multipart/form-data" class="mb-4">
             <div class="form-group">
-                <label for="sentence">Tu tekst:</label>
+                <label for="sentence">text:</label>
                 <input type="text" id="sentence" name="sentence" class="form-control" value="{{ sentence }}" required>
             </div>
+
             <button type="submit" name="analyze_text" class="btn btn-primary">
-                <i class="fas fa-search"></i> Tu Klik
+                <i class="fas fa-search"></i> Click
             </button>
+
+            {% if sentiment %}
+                <h2 class="alert alert-info">prediction: {{ sentiment }}</h2>
+            {% endif %}
         </form>
 
         <!-- Form to analyze data from a CSV file -->
         <form method="post" enctype="multipart/form-data" class="mb-4">
             <div class="form-group">
-                <label for="csv_file">Tu CSV:</label>
+                <label for="csv_file">CSV:</label>
                 <input type="file" id="csv_file" name="csv_file" class="form-control-file" accept=".csv" required>
             </div>
+
+            <div class="form-group" id="rows-container" style="display: none;">
+                <label for="num_rows">No of rows</label>
+                <input type="number" id="num_rows" name="num_rows"
+                       class="form-control" min="1" value="10">
+            </div>
+
             <button type="submit" name="analyze_csv" class="btn btn-secondary">
-                <i class="fas fa-file-upload"></i> Analizuj CSV(10 wierszy XD)
+                <i class="fas fa-file-upload"></i> Analyze(slow asf)
             </button>
         </form>
 
-        <!-- Display results for single sentence analysis -->
-        {% if sentiment %}
-            <h2 class="alert alert-info">Ten tekst jest: {{ sentiment }}</h2>
-        {% endif %}
 
         <!-- Display results for CSV analysis -->
         {% if csv_results %}
-            <h3 class="mt-4">Wyniki analizy:</h3>
-            <table class="table table-bordered mt-3">
+            <h3 class="mt-5">Zawartość CSV:</h3>
+
+            <div class="table-container">
+            <table class="table table-striped table-bordered mt-3">
                 <thead>
                     <tr>
-                        <th>Sentyment</th>
-                        <th>Ilość</th>
+                        {% for column in csv_results[0].keys() %}
+                            <th>{{ column }}</th>
+                        {% endfor %}
                     </tr>
                 </thead>
                 <tbody>
-                    {% for sentiment, count in csv_results.items() %}
+                    {% for row in csv_results %}
                         <tr>
-                            <td>{{ sentiment }}</td>
-                            <td>{{ count }}</td>
+                            {% for value in row.values() %}
+                                <td>{{ value }}</td>
+                            {% endfor %}
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
+            </div>
         {% endif %}
     </div>
+
+
+<script>
+    document.getElementById("csv_file").addEventListener("change", function() {
+        const rowsContainer = document.getElementById("rows-container");
+
+        if (this.files.length > 0) {
+            rowsContainer.style.display = "block";
+        } else {
+            rowsContainer.style.display = "none";
+        }
+    });
+</script>
 </body>
 </html>

@@ -1,6 +1,13 @@
 body {
     margin-top: 20px;
-    overflow: hidden;
+    overflow-y: auto;
     min-height: 100vh; /* Ensure the body covers the full viewport height */
     background: linear-gradient(135deg, #e0e0e0, #bdbdbd) no-repeat; /* Ensure no repeat */
+}
+
+.table-container {
+    max-height: 600px;   /* wysokość widocznej tabeli */
+    overflow-y: auto;    /* scroll pionowy */
+    overflow-x: auto;    /* scroll poziomy jeśli szeroka */
+    border: 1px solid #ddd;
 }
