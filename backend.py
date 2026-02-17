@@ -1,7 +1,8 @@
 import torch
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
+import pandas as pd
 
-model = AutoModelForSequenceClassification.from_pretrained("./model/herbert")
+model = AutoModelForSequenceClassification.from_pretrained("kubalewcz/sentbert")
 tokenizer = AutoTokenizer.from_pretrained("./tokenizer/herbert_base_cased")
 
 def predict_sentiment(text):
@@ -14,32 +15,40 @@ def predict_sentiment(text):
     predicted_class = torch.argmax(logits, dim=-1).item()
 
     if predicted_class == 0:
-        sentiment = "neutralny"
+        sentiment = "neutral"
     elif predicted_class == 1:
-        sentiment = "negatywny"
+        sentiment = "negative"
     elif predicted_class == 2:
-        sentiment = "pozytywny"
+        sentiment = "positive"
     else:
-        sentiment = "niezdecydowany"
+        sentiment = "unknown"
 
     return sentiment
 
-def predict_csv(file):
+def predict_csv(file, subset_value):
     data = file
 
-    data.drop('target', inplace=True, axis=1)
 
-    counts = {"neutralny": 0,
-              "negatywny": 0,
-              "pozytywny": 0,
-              "niezdecydowany": 0
-              }
+    # counts = {"neutralny": 0,
+    #           "negatywny": 0,
+    #           "pozytywny": 0,
+    #           "niezdecydowany": 0
+    #           }
 
-    for i, j in data[:10].iterrows():
-        x = predict_sentiment(j['text'])
-        counts[x] += 1
+    subset = data.head(subset_value)
+    data.loc[subset.index, "Prediction"] = subset["text"].apply(predict_sentiment)
 
-    return counts
+    mapping = {
+        0: "neutral",
+        1: "negative",
+        2: "positive",
+        3: "unknown"
+    }
+
+    data["target"] = data["target"].map(mapping)
+
+    return data
+
 
 if __name__ == "__main__":
     print(predict_csv("dataset/dataset_test_csv/dataset_test.csv"))
